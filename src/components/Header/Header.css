@@ -1,0 +1,11 @@
+header {
+    text-align: center;
+}
+
+#win {
+    color: green;
+}
+
+#guess {
+    color: red;
+}
