@@ -10,7 +10,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const db = require("./models");
 
-mongoose.connect("mongodb://localhost/clickGameDb");
+if(process.env.MONGODB_URI) {
+  mongoose.connect(MONGODB_URI);
+} else {
+  mongoose.connect("mongodb://localhost/clickGameDb");
+}
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
