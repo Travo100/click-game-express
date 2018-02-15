@@ -10,11 +10,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const db = require("./models");
 
-if(process.env.MONGODB_URI) {
-  mongoose.connect(MONGODB_URI);
-} else {
-  mongoose.connect("mongodb://localhost/clickGameDb");
-}
+const dbURL = process.env.MONGODB_URI || "mongodb://localhost/clickGameDb";
+
+// connect to your prod mongodb or if that does not exist
+// then connect to your local
+mongoose.connect(dbURL);
+
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
