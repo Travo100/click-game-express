@@ -25,6 +25,8 @@ class Submit extends Component {
                     name: "",
                     image: ""
                 });
+                // go back to the home route
+                this.props.history.push("/");
             })
             .catch(err => alert("Something went wrong!"));
     };

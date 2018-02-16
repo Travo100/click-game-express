@@ -19,7 +19,6 @@ class Game extends Component {
         // using the getRandomCardId method of the class
         this.setState({randomChihuahuaId: this.getRandomCardId(this.state.chihuahuas) });
         API.getChihuahuas().then(res => {
-            console.log(res);
             const randomId = this.getRandomCardId(res.data);
             res.data[randomId].picked = true;
             this.setState({
