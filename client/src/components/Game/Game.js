@@ -9,21 +9,27 @@ import "./Game.css";
 class Game extends Component {
     state = {
         chihuahuas : [],
-        randomChihuahuaId: 0,
         winCount: 0,
         guessCount: 0
     }
 
     componentDidMount() {
-        // once our component mounts get a random id from the cards 
-        // using the getRandomCardId method of the class
-        this.setState({randomChihuahuaId: this.getRandomCardId(this.state.chihuahuas) });
+        // once our component mounts get all the cards from the database
         API.getChihuahuas().then(res => {
-            const randomId = this.getRandomCardId(res.data);
-            res.data[randomId].picked = true;
-            this.setState({
-                chihuahuas: res.data
-            });
+            // check to see if we have any cards to display
+            if(res.data.length > 0) {
+                const randomId = this.getRandomCardId(res.data);
+                res.data[randomId].picked = true;
+                this.setState({
+                    chihuahuas: res.data
+                });
+            } else {
+                // if no cards are found, then kick the user to the submit page
+                // to submit a chihuahua
+                // kick em to the post page
+                this.props.history.push("/submit");
+            }
+           
         });
     }
 
@@ -41,11 +47,7 @@ class Game extends Component {
             const chihuhuaArr = this.state.chihuahuas;
             chihuhuaArr[randomId].picked = true;
             this.setState({
-                chihuahuas: chihuhuaArr
-            });
-
-            this.setState({
-                randomChihuahuaId: this.getRandomCardId(this.state.chihuahuas), 
+                chihuahuas: chihuhuaArr, 
                 winCount: this.state.winCount + 1
             });
         } else { 

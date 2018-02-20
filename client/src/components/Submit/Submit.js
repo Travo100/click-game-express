@@ -4,7 +4,7 @@ import API from "./../../utils/API";
 class Submit extends Component {
     state = {
         name: "",
-        image: ""
+        image: undefined
     }
 
     handleInputChange = event => {
